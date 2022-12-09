@@ -6,12 +6,18 @@ import {
   View
 } from 'react-native';
 import Button from './src/components/Buttons';
+import Display from './src/components/Display'
 
 
 const App = () => {
 
+  state = {
+    displayValue: '0'
+  }
+
   return (
     <SafeAreaView style={styles.container}>
+      <Display value = {this.state.displayValue} />
       <View style={styles.buttons}>
         <Button label="AC" />
         <Button label="/" />
