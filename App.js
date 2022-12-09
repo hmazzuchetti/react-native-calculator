@@ -3,15 +3,35 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
+  View
 } from 'react-native';
+import Button from './src/components/Buttons';
 
 
 const App = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Welcome!</Text>
-      <Text>App.js</Text>
+      <View style={styles.buttons}>
+        <Button label="AC" />
+        <Button label="/" />
+        <Button label="7" />
+        <Button label="8" />
+        <Button label="9" />
+        <Button label="*" />
+        <Button label="4" />
+        <Button label="5" />
+        <Button label="6" />
+        <Button label="-" />
+        <Button label="1" />
+        <Button label="2" />
+        <Button label="3" />
+        <Button label="+" />
+        <Button label="0" />
+        <Button label="." />
+        <Button label="=" />
+      </View>
+
     </SafeAreaView>
   );
 };
@@ -19,9 +39,11 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+  },
+  buttons: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+
   }
 });
 
