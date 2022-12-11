@@ -19,20 +19,32 @@ const initialState ={
 export default class App extends Component {
   state = { ...initialState  }
 
-  addDigit = n =>{
+  addDigit = addedDigit =>{
+    // Set clear display as true if the current value os the display is 0 or if the AC button was pressed
+    // This way, when the user add a new digit it will clear the last digit
     const clearDisplay = this.state.displayValue === '0' || this.state.clearDisplay;
 
-    if(n === '.' && !clearDisplay && this.state.displayValue.includes('.')){
+
+    // If the user press the . button AND clearDisplay is false AND the display already shows a .
+    // Which means that we already have a float number on display, then -> do nothing.
+    if(addedDigit === '.' && !clearDisplay && this.state.displayValue.includes('.')){
       return
     }
     
+    // Set the current value to none if clearDisplay is true, else set as the displayed value
     const currentValue = clearDisplay ? '' : this.state.displayValue;
-    const displayValue = currentValue+n;
+    // Append the new digit to the displayed digit
+    const displayValue = currentValue + addedDigit;
+    // set state's displayValue as this new above displayValue
     this.setState({ displayValue, clearDisplay: false });
 
-    if(n !== "."){
-      const newValue = parseFloat(displayValue)
-      const values = [...this.state.values]
+
+    if(addedDigit !== "."){
+      // set newValue as the new displayValue converted into float
+      const newValue = parseFloat(displayValue);
+      // Makes a copy of the values array
+      const values = [...this.state.values];
+      // Set the values of the "current" position as the newValue
       values[this.state.current] = newValue;
       this.setState({ values: values });
     } 
@@ -40,11 +52,13 @@ export default class App extends Component {
   }
 
   clearMemory = () =>{
-    //Simplesmente restaura o estado inicial
+    // Simply set the current state to the initial state
     this.setState({ ...initialState });
   }
 
   setOperation = operation =>{
+    // If the user press a operation button, 
+    // change the current evaluated number from 0 to 1, if the current evaluated number is 0
     if(this.state.current === 0){
       this.setState({ operation: operation, current: 1, clearDisplay: true })
     } else{
